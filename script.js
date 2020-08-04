@@ -2,7 +2,7 @@ const postContainer = document.getElementById('post__container');
 const loading = document.querySelector('.loader');
 const filter = document.getElementById('filter');
 
-let limit = 5;
+let limit = 10;
 let page = 1;
 
 // Fetch posts from API
@@ -45,30 +45,31 @@ function showLoading() {
 
     setTimeout(() => {
       page++;
+
       showPosts();
-    }, 300);
+    }, 200);
   }, 1000);
 }
 
 // Filter Posts by input
 function filterPosts(e) {
   const term = e.target.value.toUpperCase();
-  const post = document.querySelectorAll(".post__post");
+  const post = document.querySelectorAll('.post__post');
 
-  post.forEach(post => {
-    const title = post.querySelector(".post__title").innerText.toUpperCase();
-    const body = post.querySelector(".post__body").innerText.toUpperCase();
+  post.forEach((post) => {
+    const title = post.querySelector('.post__title').innerText.toUpperCase();
+    const body = post.querySelector('.post__body').innerText.toUpperCase();
 
     if (title.indexOf(term) > -1 || body.indexOf(term) > -1) {
-      post.style.display = "flex";
+      post.style.display = 'flex';
     } else {
-      post.style.display = "none";
+      post.style.display = 'none';
     }
-
-  })
+  });
 }
 
 // Shows initial posts
+
 showPosts();
 
 // Scroll
@@ -76,12 +77,11 @@ showPosts();
 window.addEventListener('scroll', () => {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-  if (scrollTop + clientHeight >= scrollHeight - 5) {
+  if (scrollTop + clientHeight >= scrollHeight) {
     showLoading();
   }
 });
 
-
 // Filter
 
-filter.addEventListener("input", filterPosts);
+filter.addEventListener('input', filterPosts);
